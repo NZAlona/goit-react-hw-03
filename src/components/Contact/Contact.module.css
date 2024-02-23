@@ -1,9 +1,14 @@
 .list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.item {
   border: 1px black solid;
   border-radius: 4px;
-  margin-bottom: 15px;
   padding: 10px 10px;
-  max-width: 350px;
+  width: 350px;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -28,6 +33,7 @@
   font-weight: normal;
   line-height: 1.8;
   padding-left: 10px;
+  margin-right: 25px;
 }
 
 .icons {

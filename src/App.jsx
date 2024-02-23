@@ -13,18 +13,31 @@ const userData = [
 
 export default function App() {
   const [userValue, setUserValue] = useState(userData);
+  const [filter, setFilter] = useState('');
 
-  // const handleUserValue = () => {
-  //   setUserValue();
-  // };
+  const addUserCard = newCard => {
+    setUserValue(currentCard => {
+      return [...currentCard, newCard];
+    });
+  };
+
+  const deleteUserCard = cardId => {
+    setUserValue(cardPrev => {
+      return cardPrev.filter(card => card.id !== cardId);
+    });
+  };
+
+  const visibleCard = userValue.filter(user =>
+    user.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
-        <SearchBox />
-        <ContactList state={userValue} />
+        <ContactForm onAdd={addUserCard} />
+        <SearchBox value={filter} onFilter={setFilter} />
+        <ContactList state={visibleCard} onDelete={deleteUserCard} />
       </div>
     </>
   );

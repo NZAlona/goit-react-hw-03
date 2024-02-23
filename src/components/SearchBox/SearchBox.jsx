@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import css from './SearchBox.module.css';
 
-export default function SearchBox() {
+export default function SearchBox({ value, onFilter }) {
   const inputField = useId();
   return (
     <>
@@ -9,7 +9,13 @@ export default function SearchBox() {
         Find contacts by name
       </label>
 
-      <input type="text" id={inputField} className={css.inputField} />
+      <input
+        type="text"
+        id={inputField}
+        value={value}
+        onChange={e => onFilter(e.target.value)}
+        className={css.inputField}
+      />
     </>
   );
 }
