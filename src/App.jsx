@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContactForm from './components/ContactForm/ContactForm';
 import SearchBox from './components/SearchBox/SearchBox';
 import ContactList from './components/ContactList/ContactList';
@@ -11,9 +11,20 @@ const userData = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
+const getStoredCard = () => {
+  const savedCard = window.localStorage.getItem('saved-data');
+  if (savedCard !== '[]') {
+    return JSON.parse(savedCard);
+  }
+};
+
 export default function App() {
-  const [userValue, setUserValue] = useState(userData);
+  const [userValue, setUserValue] = useState(getStoredCard() || userData);
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-data', JSON.stringify(userValue));
+  }, [userValue]);
 
   const addUserCard = newCard => {
     setUserValue(currentCard => {
