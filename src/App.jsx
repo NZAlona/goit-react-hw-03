@@ -9,6 +9,7 @@ const getContactsFromLocalStorage = () => {
   if (savedCard !== null) {
     return JSON.parse(savedCard);
   }
+  return [];
 };
 
 export default function App() {
