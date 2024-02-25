@@ -1,9 +1,16 @@
 import Contact from '../Contact/Contact';
+import css from './ContactList.module.css';
 
-export default function ContactList({ state, onDelete }) {
+export default function ContactList({ contacts, onDelete }) {
   return (
     <>
-      <Contact value={state} onDeleteCard={onDelete} />
+      <ul className={css.list}>
+        {contacts.map(contact => (
+          <li key={contact.id} className={css.item}>
+            <Contact value={contact} onDeleteCard={onDelete} />
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

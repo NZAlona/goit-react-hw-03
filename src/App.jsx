@@ -4,22 +4,15 @@ import SearchBox from './components/SearchBox/SearchBox';
 import ContactList from './components/ContactList/ContactList';
 import './App.css';
 
-const userData = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-];
-
-const getStoredCard = () => {
+const getContactsFromLocalStorage = () => {
   const savedCard = window.localStorage.getItem('saved-data');
-  if (savedCard !== '[]') {
+  if (savedCard !== null) {
     return JSON.parse(savedCard);
   }
 };
 
 export default function App() {
-  const [userValue, setUserValue] = useState(getStoredCard() || userData);
+  const [userValue, setUserValue] = useState(getContactsFromLocalStorage());
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -48,7 +41,7 @@ export default function App() {
         <h1>Phonebook</h1>
         <ContactForm onAdd={addUserCard} />
         <SearchBox value={filter} onFilter={setFilter} />
-        <ContactList state={visibleCard} onDelete={deleteUserCard} />
+        <ContactList contacts={visibleCard} onDelete={deleteUserCard} />
       </div>
     </>
   );

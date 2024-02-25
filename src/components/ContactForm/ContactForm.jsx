@@ -4,13 +4,13 @@ import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import { ErrorMessage } from 'formik';
 
-const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
+const phoneRegex = /^([0-9]+-)*[0-9]+$/;
 
 const ValidationSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('Required'),
   number: Yup.string()
-    .min(6, 'Too Short!')
-    .max(12, 'Too Long!')
+    .min(3, 'Too Short!')
+    .max(50, 'Too Long!')
     .matches(phoneRegex, 'Phone number is not valid')
     .required('Required'),
 });
